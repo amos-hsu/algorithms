@@ -34,17 +34,17 @@ public class singele{
 */
 //线程安全：双重检查锁（同步代码块）,volatile关键字禁止指令重排序 （懒汉式）
 public class Singele1{
-    private static volatile Single1 instance;
+    private static volatile Single1 INSTANCE;
     private Single1(){
 
     }
     public static Single1 getInstance(){
-        if(instance == null)
+        if(INSTANCE == null)
             synchronized(Singele1.class){
-                if(instance == null)
-                    intance = new Single();
+                if(INSTANCE == null)
+                    INSTANCE = new Single();
             }
-        return instance;
+        return INSTANCE;
     }
 } 
 //线程安全：静态内部类 (内部类是一个饿汉式单例，但从外部看是懒汉式的实现)
@@ -53,9 +53,9 @@ public class Single2{
 
     }
     private static class InstanceHolder{
-        private static final Single2 instance = new Single2();
+        private static final Single2 INSTANCE = new Single2();
     }
     public static Single2 getInstance(){
-        return InstanceHolder.instance;
+        return InstanceHolder.INSTANCE;
     }
 }
