@@ -16,6 +16,7 @@
 # 插入的indexing label使用新建的index，与原数组的label比较
 # 注意：这里是sorted array
 
+
 class Solution(object):
     def removeDuplicates(self, nums):
         """
