@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 public class Solution {
     public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
-        if(listNode == null) return null;
+        //if(listNode == null) return null;
         Stack<Integer> stack = new Stack<>();
         while(listNode != null){
             stack.push(listNode.val);

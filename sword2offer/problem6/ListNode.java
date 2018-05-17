@@ -29,6 +29,22 @@ class MyLinkedList{
      * @return true:成功 
      */
     public Boolean deleteNode(int index){
-        
+        if(inedx<1 || index>length())
+            return false;
+        if(index == 1){
+            head = head.next;
+            return true;
+        }
+        Node preNode = head;
+        Node curNode = head.next;
+        for(int i = 2; curNode != null; i++){
+            if(index == i){
+                preNode.next = curNode.next;
+                return true;
+            }
+            preNode = curNode;
+            curNode = preNode.next;
+        }
+        retrun true;
     }
 }
