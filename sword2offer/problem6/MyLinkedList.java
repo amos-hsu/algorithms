@@ -45,6 +45,6 @@ class MyLinkedList{
             preNode = curNode;
             curNode = preNode.next;
         }
-        retrun true;
+        return true;
     }
 }
