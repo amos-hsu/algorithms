@@ -1,42 +1,42 @@
 /**
  * 二叉排序树
  */
-class Node{
+class TreeNode{
     public int val;
-    public Node left;
-    public Node right;
-    public Node(int val){
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode(int val){
         this.val = val;
         this.left = null;
         this.right = null;
     }
 }
 public class BinartTree{
-    private Node root;
+    private TreeNode root;
     public BinartTree(){
         root = null;
     }
 
     //插入二叉排序树
     public void insert(int val){
-        Node newNode = new Node(val);
+        TreeNode newTreeNode = new TreeNode(val);
         if(root == null)
-            root = newNode;
+            root = newTreeNode;
         else{
-            Node cur = root;
-            Node parent;
+            TreeNode cur = root;
+            TreeNode parent;
             while(true){
                 parent = cur;
                 if(val<cur.val){
                     cur = cur.left;
                     if(cur == null){
-                        parent.left = newNode;
+                        parent.left = newTreeNode;
                         return;
                     }
                 }else{
                     cur = cur.right;
                     if(cur = null){
-                        parent.right = newNode;
+                        parent.right = newTreeNode;
                         return;
                     }
                 }
@@ -52,7 +52,7 @@ public class BinartTree{
     }
 
     //中序遍历
-    public void inOrder(Node localRoot){
+    private void inOrder(TreeNode localRoot){
         if(localRoot != null){
             inOrder(localRoot.left);
             System.out.print(localRoot.val+" ");
@@ -64,7 +64,7 @@ public class BinartTree{
     }
 
     //先序遍历
-    public void preOrder(Node localRoot){
+    private void preOrder(TreeNode localRoot){
         if(localRoot != null){
             System.out.print(localRoot.val+" ");
             preOrder(localRoot.left);
@@ -76,7 +76,7 @@ public class BinartTree{
     }
 
     //后序遍历
-    public void postOrder(Node localRoot){
+    private void postOrder(TreeNode localRoot){
         if(localRoot != null){
             postOrder(localRoot.left);
             postOrder(localRoot.right);
