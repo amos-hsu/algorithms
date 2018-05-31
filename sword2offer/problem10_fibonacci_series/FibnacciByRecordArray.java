@@ -1,3 +1,5 @@
+//O(N)+O(N)
+
 public class Solution {
     public int Fibonacci(int n) {
         if(n <= 1) return n;
