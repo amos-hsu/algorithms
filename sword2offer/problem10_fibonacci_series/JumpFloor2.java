@@ -18,7 +18,8 @@ public class Solution {
     //O(N)+O(1)
     public int JumpFloor2(int n) {
         if(n <= 1) return n;
-        if(n == 1) pre = 1;
+        int pre = 1;
+        int res = 0;
         for(int i = 2; i <= n; i ++) {
             res = pre * 2;
             pre = res;
