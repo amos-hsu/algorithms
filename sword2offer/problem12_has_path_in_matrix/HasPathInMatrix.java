@@ -37,14 +37,14 @@ public class Solution {
         if(strIndex == str.length - 1) 
             return true;
         //递归过程
-        visited[index] = 1;
+        visited[index] = 1; //标记已遍历的字符位置
         boolean isHasPath = backtrack(matrix, rows, cols, row+1, col, strIndex+1, str, visited)
                             || backtrack(matrix, rows, cols, row-1, col, strIndex+1, str, visited)
                             || backtrack(matrix, rows, cols, row, col+1, strIndex+1, str, visited)
                             || backtrack(matrix, rows, cols, row, col-1, strIndex+1, str, visited);
         if(isHasPath == true)
             return true;
-        visited[index] = 0;
+        visited[index] = 0; //没有找到下一个结点，取消标记（回溯到上一个遍历点）
         return false;
     }
 }
