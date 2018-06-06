@@ -14,8 +14,8 @@
  * 
  * 回溯算法：
  * 若路径上的第i个字符是ch，那么到相邻的格子找路径上的i+1个字符，如果找不到，递归终止。
- * 重复以上过程，直到路径字符串上的所有字符都在矩阵中找到合适的位置,此时i==str.length-1（递归终止条件）。
  * 另外，矩阵边界越界或者访问到已经访问过的字符位置，递归终止。
+ * 重复以上过程，直到路径字符串上的所有字符都在矩阵中找到合适的位置,此时i==str.length-1（成功后的递归终止条件）。
  */
 
 public class Solution {
@@ -31,7 +31,7 @@ public class Solution {
     private boolean backtrack(char[] matrix, int rows, int cols, int row, int col, int strIndex, char[] str, int[] visited){
         int index = row * cols + col;
         //递归基准条件
-        if(row<0 || row>=rows || col<0 || col>=cols || matrix[index] != str[strIndex] || visited == 1){
+        if(row<0 || row>=rows || col<0 || col>=cols || matrix[index] != str[strIndex] || visited[index] == 1){
             return false;
         }
         if(strIndex == str.length - 1) 
