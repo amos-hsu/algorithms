@@ -2,10 +2,8 @@ import org.omg.CORBA.TIMEOUT;
 
 //把一根绳子剪成多段，并且使得每段的长度乘积最大。
 
-//思路：动态规划算法
-
 class Sulotion{
-    public int stringCutting(int len){
+    public int stringCuttingDynamic(int len){//思路：动态规划算法
         if(len<2) return 0;
         if(len == 2) return 1;
         if(len == 3) return 2;
