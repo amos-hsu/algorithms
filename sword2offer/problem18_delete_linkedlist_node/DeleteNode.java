@@ -10,7 +10,7 @@ public class Solution{
     //给定一个链表和一个节点对象，在O(1)时间内删除该节点
     public void deleteNode(ListNode head, ListNode delteNode){
         if(head == nul || head.next == null || deleteNode == null)
-            return null;
+            return ;
         if(deleteNode.next != null){
             ListNode nextNode = deleteNode.next;
             deleteNode.val = nextNode.val;
