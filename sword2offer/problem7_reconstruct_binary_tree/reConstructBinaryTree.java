@@ -19,16 +19,16 @@ public class Solution {
         if(pre.length!=in.length||pre.length==0||in.length==0) return null;
         return reConstructBinaryTree(pre, 0, pre.length-1, in, 0, in.length-1);
     }
-	private TreeNode reConstructBinaryTree(int[] pre, int preL, int preR, int[] in, int inL, int inR){
-        if(preL>preR) return null;
-        TreeNode root = pre[preL];
+    private TreeNode reConstructBinaryTree(int[] pre, int preL, int preR, int[] in, int inL, int inR){
+        if(preL > preR)
+            return null;
+        TreeNode root = new TreeNode(pre[preL]);
         for(int i=inL; i<=inR; i++){
             if(in[i] == pre[preL]){
-                root.letf = reConstructBinaryTree(pre, preL+1, preL+i-inL, in, inL, i-1); //左子树不可能为空
-                root.rigth = reConstructBinaryTree(pre, preL+i-inL+1, preR, in, i+1, inR); //右子树为空，(preL+i-inL+1)>preR,返回null
-                break;
+                root.left = reConstructBinaryTree(pre, preL+1, preL+i-inL, in, inL, i-1);
+                root.right = reConstructBinaryTree(pre, preL+i-inL+1, preR, in, i+1, inR);
             }
         }
         return root;
-    }
+	}
 }

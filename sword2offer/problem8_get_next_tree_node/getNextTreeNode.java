@@ -15,7 +15,7 @@ public class TreeLinkNode {
     int val;
     TreeLinkNode left = null;
     TreeLinkNode right = null;
-    TreeLinkNode next = null;
+    TreeLinkNode parent = null;
 
     TreeLinkNode(int val) {
         this.val = val;
@@ -26,18 +26,20 @@ public class Solution {
     public TreeLinkNode GetNext(TreeLinkNode pNode){
         if(pNode == null) return null;
         if(pNode.right != null){
-            TreeLikNode node = pNode.right;
+            TreeLinkNode node = pNode.right;
             while(node.left != null)
                 node = node.left;
             return node;
         }else{
-            while(pNode.next != null){
-                TreeLinkNode parent = pNode.next;
-                if(parent.left == pNode)
-                    return parent;
-                pNode = pNode.next;
+            TreeLinkNode pParent = pNode.parent;
+			TreeLinkNode pCur = pNode;
+			while(pParent != null){ 
+                if(pParent.left == pCur)
+                    return pParent;
+                pCur = pParent;
+				pParent = pParent.parent;
             }
-            return null;
         }
+		return null;
     }
 }

@@ -8,7 +8,7 @@ class RepalceSpace{
         int originalLen = str.length();
         for(int i = 0; i < originalLen; i++)
             if(str.charAt(i) == ' ')
-                str.append(' ');
+                str.append('  ');
         int newLen = str.length();
         int indexOfOriginal = originalLen - 1;
         int indexOfNew = newLen - 1;
