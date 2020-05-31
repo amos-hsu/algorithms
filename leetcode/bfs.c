@@ -1,5 +1,3 @@
-#include "securec.h"
-#include "securectype.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -41,7 +39,7 @@ int **levelOrder(struct TreeNode *root, int *returnSize, int **returnColumnSizes
 {
     int **res = NULL;
     int *colSizes = NULL;
-    int depth = MaxDepthOfTree(root); // 返回的二维数组行数
+    int depth = MaxDepthOfTree(root);
     if (depth < 0) {
         return NULL;
     }
