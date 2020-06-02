@@ -57,3 +57,33 @@ bool isValid(char * s){
     }
     return (top == -1) ? true : false;
 }
+
+/**
+ * 进一步优化：
+ * 左括号入栈
+ * 右括号，栈为空，则不匹配返回;
+ *        栈不为空，则判断栈顶元素是否匹配，不匹配则返回false
+ **/
+bool isValid(char * s){
+    if (s == NULL || strlen(s) == 0) return true;
+    if (strlen(s) % 2 == 1) return false;
+    int stack[strlen(s)];
+    int top = -1;
+    for (int i = 0; i < strlen(s); i++) {
+        if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
+            stack[++top] = s[i];
+        } else {
+            if (top == -1) {
+                return false;
+            } 
+            if ((s[i] == ')' && stack[top] == '(') ||
+                (s[i] == ']' && stack[top] == '[') ||
+                (s[i] == '}' && stack[top] == '{')) {
+                top--;
+                continue;
+            }
+            return false;
+        }
+    }
+    return (top == -1) ? true : false;
+}
