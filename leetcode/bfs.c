@@ -37,19 +37,16 @@ int MaxDepthOfTree(struct TreeNode *root)
 #define MAXSIZE 1000
 int **levelOrder(struct TreeNode *root, int *returnSize, int **returnColumnSizes)
 {
+    if (root == NULL) return NULL;
     int **res = NULL;
     int *colSizes = NULL;
-    int depth = MaxDepthOfTree(root);
-    if (depth < 0) {
-        return NULL;
-    }
-    colSizes = (int *)malloc(sizeof(int) * depth); // 返回的二维数组每行列数
-    res = (int **)malloc(sizeof(int *) * depth);   // 返回的二维数组
-    struct TreeNode *queue[MAXSIZE];
     int rear = 0;
     int front = 0;
     int level = 0;
-    int i;
+    int depth = MaxDepthOfTree(root);
+    colSizes = (int *)malloc(sizeof(int) * depth); // 返回的二维数组每行列数
+    res = (int **)malloc(sizeof(int *) * depth);   // 返回的二维数组
+    struct TreeNode *queue[MAXSIZE];
     queue[rear++] = root;
     while (front != rear) {
         int col = rear - front;
