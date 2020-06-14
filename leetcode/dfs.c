@@ -4,17 +4,14 @@
 #include <assert.h>
 #include <ctype.h>
 #include <limits.h>
- 
-/**
- * Definition for a binary tree node.
- */
+
 struct TreeNode {
     int val;
     struct TreeNode *left;
     struct TreeNode *right;
 };
  
-#define null 0xffffff
+#define null -1
  
 int TreeSize(struct TreeNode *root)
 {
@@ -65,7 +62,7 @@ int *preorder(struct TreeNode *root, int *retSize)
 int main()
 {
     /* 用例输入的用一维数组表示的二叉树 */
-    int nodeVal[] = {1,null,2,3};
+    int nodeVal[] = {1, null, 2, 3};
     int nodeNum = sizeof(nodeVal) / sizeof(int);
     struct TreeNode *node[nodeNum];
  

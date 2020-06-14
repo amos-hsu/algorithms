@@ -5,16 +5,13 @@
 #include <ctype.h>
 #include <limits.h>
 
-/* *
- * Definition for a binary tree node.
- */
 struct TreeNode {
     int val;
     struct TreeNode *left;
     struct TreeNode *right;
 };
 
-#define null 0xffffff
+#define null -1
 
 #define MAXSIZE 10000
 
@@ -59,32 +56,32 @@ int **levelOrder(struct TreeNode *root, int *returnSize, int **returnColumnSizes
     return res;
 }
 
-int main()
+int main(void)
 {
-    /* 用例输入的用一维数组表示的二叉树 */
-    int nodeVal[] = { 3, 9, 20, null, null, 15, 7 };
-    int nodeNum = sizeof(nodeVal) / sizeof(int);
+    /* 用例：一维数组表示的二叉树 */
+    int nodeVals[] = { 3, 9, 20, null, null, 15, 7 };
+    int nodeNum = sizeof(nodeVals) / sizeof(int);
     struct TreeNode *node[nodeNum];
 
-    /* 申请测试用例输入参数中需要的内存并根据用例输入初始化 */
+    /* 申请测试用例需要的内存，根据用例输入初始化 */
     for (int i = 0; i < nodeNum; i++) {
         node[i] = (struct TreeNode *)malloc(sizeof(struct TreeNode));
-        node[i]->val = nodeVal[i];
+        node[i]->val = nodeVals[i];
         node[i]->right = NULL;
         node[i]->left = NULL;
     }
 
-    /* 将用例的一维数组转换成二叉树 */
-    int absentNum = 0;
+    /* 将一维数组转换成二叉树 */
+    int nullNodeNum = 0;
     int left;
     int right;
     for (int i = 0; i < nodeNum; i++) {
-        if (nodeVal[i] == null) {
-            absentNum++;
+        if (nodeVals[i] == null) {
+            nullNodeNum++;
             continue;
         }
-        left = i * 2 - 2 * absentNum + 1;
-        right = i * 2 - 2 * absentNum + 2;
+        left = i * 2 - 2 * nullNodeNum + 1;
+        right = i * 2 - 2 * nullNodeNum + 2;
         if (left < nodeNum) {
             node[i]->left = node[left];
         }
@@ -94,14 +91,19 @@ int main()
     }
     /* 运行测试用例给出的接口函数 */
     int resSize = 0;
-    int *result = preorder(node[0], &resSize);
+    int *resColSizes;
+    int **result = levelOrder(node[0], &resSize, &resColSizes);
+    if (result == NULL) return 0;
     for (int i = 0; i < resSize; i++) {
-        if (result[i] == null)
-            continue;
-        printf("%d\n", result[i]);
+        for (int j = 0; j < resColSizes[i]; j++) {
+            printf("%d ", result[i][j]);
+        }
+        printf("\n");
+        free(result[i]);
     }
-
     free(result);
+    free(resColSizes);
+
     /* 释放测试用例输入参数中申请的内存 */
     for (int i = 0; i < nodeNum; i++) {
         free(node[i]);
