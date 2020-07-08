@@ -1,4 +1,4 @@
-#！/bin/bash
+#!/bin/bash
 set -e
 self=$(readlink -f $0)
 ROOT_PATH=${self%/*}
@@ -12,8 +12,8 @@ export ASAN_OPTIONS=halt_on_error=0:use_sigaltstack=0:detect_leaks=1:\
 					malloc_context_size=15:suppressions=$SUPP_FILE
 export LD_LIBRARY_PATH=./lib
 
-function green_echo() {
-    echo -e "\033[32m${*} \033[0m\c"
+function green_echo () {
+	echo -e "\033[32m${*} \033[0m\c"
 }
 function orange_echo () {
     echo -e "\033[34m${*}\033[0m"
