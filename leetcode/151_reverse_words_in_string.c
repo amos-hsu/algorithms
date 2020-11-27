@@ -1,7 +1,4 @@
 #include <stdio.h>
-#include "uthash.h"
-
-HASH_ADD_INIT()
 
 void reverse(char *s, int l, int r)
 {

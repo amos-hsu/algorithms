@@ -1,10 +1,8 @@
 #!/bin/bash
 
 set -e
-
 self=$(readlink -f $0)
 ROOT_PARH=${self%/*}
-
 ASAN_ENABLE="y"    # default enable asan
 
 function usage() {
@@ -55,11 +53,11 @@ fi
 
 LIB_ASAN_DIR=$(find /usr -name "libasan.so.4")  # or get by: `find / -name "libasan.so.4"`
 COMPILE_CMD="gcc -c ${CFLAG} ${SRC_DIR}/${SRC_FILE_NAME} -o ${ROOT_PARH}/${SRC_FILE_NAME}.o"
-LINK_CMD="gcc -o MAIN ${SRC_FILE_NAME}.o ${LDFLAG}"
+LINK_CMD="gcc -o main ${SRC_FILE_NAME}.o ${LDFLAG}"
 
-green_echo "[  0%]" && echo "Build clean" && [ -f ${SRC_FILE_NAME}.o ] && rm ${SRC_FILE_NAME}.o && [ -f MAIN ] && rm MAIN
+green_echo "[  0%]" && echo "Build clean" && [ -f ${SRC_FILE_NAME}.o ] && rm ${SRC_FILE_NAME}.o && [ -f main ] && rm main
 green_echo "[ 10%]" && echo "Scan C sources ${SRC_DIR}/${SRC_FILE_NAME}"
-green_echo "[ 20%]" && echo "CC ${SRC_FILE_NAME} -o ${SRC_FILE_NAME}.o" && ${COMPILE_CMD} || exit 1
+green_echo "[ 20%]" && echo "gcc -c ${SRC_FILE_NAME} -o ${SRC_FILE_NAME}.o" && ${COMPILE_CMD} || exit 1
 green_echo "[ 60%]" && echo "Linking C executale"
 green_echo "[ 80%]" && echo "${LINK_CMD}" && ${LINK_CMD} && rm ${SRC_FILE_NAME}.o || exit 1
 green_echo "[100%]" && echo "Build success"
@@ -69,7 +67,7 @@ export LD_LIBRARY_PATH=./lib
 export ASAN_OPTIONS=halt_on_error=0:use_sigaltstack=0:detect_leaks=1:malloc_context_size=15:suppressions=$SUPP_FILE
 
 if [ ${ASAN_ENABLE} == "y" ]; then  # default enable asan
-    LD_PRELOAD=${LIB_ASAN_DIR} ./MAIN
+    LD_PRELOAD=${LIB_ASAN_DIR} ./main
 else
-    ./MAIN
+    ./main
 fi
