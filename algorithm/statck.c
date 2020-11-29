@@ -45,13 +45,14 @@ int Top(Stack *s)
     return s->data[top];
 }
 
-/* 单调栈模板 */
+/* 单调栈模板：单调递增栈 */
 void Template(int *nums, int numsSize)
 {
     Stack s;
     for (int i = 0; i < numsSize; i++) {
         while (!IsEmpty(&s) && nums[i] <= Top(&s)) {
             Pop(&s);
+            // 更新结果
         }
         Push(&s, nums[i]);
     }
