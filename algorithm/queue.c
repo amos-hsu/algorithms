@@ -2,7 +2,6 @@
 #define QUEUE_SIZE 6
 typedef struct TagQueue
 {
-    /* data */
     int queue[QUEUE_SIZE];
     int front;
     int rear;
