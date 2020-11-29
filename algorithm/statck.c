@@ -39,3 +39,21 @@ void Push(Stack *s, int v)
         s->data[s->top] = v;
     }
 }
+
+int Top(Stack *s)
+{
+    return s->data[top];
+}
+
+/* 单调栈模板 */
+void Template(int *nums, int numsSize)
+{
+    Stack s;
+    for (int i = 0; i < numsSize; i++) {
+        while (!IsEmpty(&s) && nums[i] <= Top(&s)) {
+            Pop(&s);
+        }
+        Push(&s, nums[i]);
+    }
+}
+
