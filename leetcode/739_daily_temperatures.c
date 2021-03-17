@@ -17,7 +17,7 @@ void DumpAns(int *s, int size)
 int* dailyTemperatures(int* T, int TSize, int* returnSize)
 {
     int *ans = (int *)malloc(sizeof(int) * TSize);
-    int stack[TSize];
+    int stack[TSize];   // 单调栈：单调递增栈
     int top = -1;
     (void)memset(ans, 0, TSize * sizeof(int));
     (void)memset(stack, 0, TSize * sizeof(int));
@@ -25,12 +25,12 @@ int* dailyTemperatures(int* T, int TSize, int* returnSize)
         // printf("i=%d\n", i);
         // DumpStack(stack, TSize);
         while (top != -1 && T[i] >= T[stack[top]]) {
-            stack[top] = 0;
+            stack[top] = 0; // stack pop
             top--;
         }
         ans[i] = (top == -1) ? 0 : stack[top] - i;
         // DumpAns(ans, TSize);
-        stack[++top] = i;
+        stack[++top] = i;  // stack push
     }
     *returnSize = TSize;
     return ans;
